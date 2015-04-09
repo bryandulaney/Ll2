@@ -10,7 +10,8 @@ public class Replacer {
 		for (int i = 0; i < translations.length; i++) {
 			translations[i] = "<a href=\"#\" class=\"tip\" title=\"" + targets[i] + "\">" + translations[i] + "</a>";
 			int startIndex = body.indexOf(targets[i]);
-			body.replace(startIndex, startIndex+targets[i].length(), translations[i]);
+			int endIndex = startIndex + targets[i].length();
+			body.replace(startIndex, endIndex, translations[i]);
 		}
 		
 		ourHolder.setBody(body.toString());

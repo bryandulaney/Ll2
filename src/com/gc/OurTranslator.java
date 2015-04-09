@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.text.WordUtils;
 
-import com.gtranslate.Language;
 import com.neovisionaries.i18n.LanguageCode;
 
 public class OurTranslator {
@@ -19,7 +18,8 @@ public class OurTranslator {
 		language = code.get(0).toString();
 
 		for (int i = 0; i < targets.length; i++) {
-			translations[i] = "THIS IS WHERE THE COMMENT BELOW GOES, DON'T PUT IT IN HERE UNLESS YOU WANT TO MAKE ME OVERDRAFT, I'M BROKE!!!";
+			translations[i] = GoogleTranslate.googleTranslateApi(targets[i],
+					"en", language);
 		}
 
 		ourHolder = new Holder(ourHolder, targets, translations);
@@ -27,6 +27,3 @@ public class OurTranslator {
 		return ourHolder;
 	}
 }
-
-//GoogleTranslate.googleTranslateApi(targets[i],
-//		Language.ENGLISH, language)

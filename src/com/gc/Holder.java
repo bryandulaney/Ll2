@@ -2,7 +2,6 @@ package com.gc;
 
 import java.io.Serializable;
 
-@SuppressWarnings("serial")
 public class Holder implements Serializable {
 	private String body;
 	private String language;
