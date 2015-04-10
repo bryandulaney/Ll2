@@ -27,10 +27,10 @@ public class LlServlet extends HttpServlet {
 		String htmlBody = doc.select("body").html();
 		//
 		//String body = request.getParameter("body");
-		String language[] = request.getParameterValues("language");
-		
+		String language = request.getParameter("language");
+		System.out.println("OUR LANGUAGE IS:" + language);
 		ourHolder.setBody(htmlBody);
-		ourHolder.setLanguage(language[0]);
+		ourHolder.setLanguage(language);
 		
 		ourHolder = OUR_ENGINE.ourEngine(ourHolder);
 		
