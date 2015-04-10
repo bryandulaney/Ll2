@@ -4,20 +4,25 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class SentenceParser {
+	private static Random rand = new Random();
+	private static String[] paragraphs;
+	private static ArrayList<String> listOfTargets = new ArrayList<String>();
+	private static String[] tempArray;
+	private static int max;
+	private static int randomNum;
+	private static String[] arrayOfTargets;
 	
 	public static Holder parseParagraphsIntoSentences(Holder ourHolder) {
-		Random rand = new Random();
-		String[] paragraphs = ourHolder.getTargets();
-		ArrayList<String> listOfTargets = new ArrayList<String>();
+		paragraphs = ourHolder.getTargets();
 		
 		for (int i = 0; i < paragraphs.length; i++) {
-			String[] tempArray = paragraphs[i].split("(?<=[.?!])\\s+(?=[A-Z])");
-			int max = tempArray.length;
-			int randomNum = rand.nextInt(max);
+			tempArray = paragraphs[i].split("(?<=[.?!])\\s+(?=[A-Z])");
+			max = tempArray.length;
+			randomNum = rand.nextInt(max);
 			listOfTargets.add(tempArray[randomNum]);
 		}
 		
-		String[] arrayOfTargets = new String[listOfTargets.size()];
+		arrayOfTargets = new String[listOfTargets.size()];
 		for (int i = 0; i < arrayOfTargets.length; i++) {
 			arrayOfTargets[i] = listOfTargets.get(i);
 		}

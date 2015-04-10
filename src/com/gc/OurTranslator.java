@@ -8,25 +8,27 @@ import com.gtranslate.Language;
 import com.neovisionaries.i18n.LanguageCode;
 
 public class OurTranslator {
+	
+	private static final String ORIGIN_LANGUAGE = Language.ENGLISH;
+	private static String desiredLanguage;
+	private static List<LanguageCode> languageCode;
+	private static String[] targetSentences;
+	private static String[] translations;
 
 	public static Holder translateSentences(Holder ourHolder) {
 
-		String language = ourHolder.getLanguage();
-		language = WordUtils.capitalize(language);
-		String[] targets = ourHolder.getTargets();
-		String[] translations = new String[targets.length];
-		List<LanguageCode> code = LanguageCode.findByName(language);
-		language = code.get(0).toString();
+		desiredLanguage = WordUtils.capitalize(ourHolder.getLanguage());
+		targetSentences = ourHolder.getTargets();
+		translations = new String[targetSentences.length];
+		languageCode = LanguageCode.findByName(desiredLanguage);
+		desiredLanguage = languageCode.get(0).toString();
 
-		for (int i = 0; i < targets.length; i++) {
-			translations[i] = "THIS IS WHERE THE COMMENT BELOW GOES, DON'T PUT IT IN HERE UNLESS YOU WANT TO MAKE ME OVERDRAFT, I'M BROKE!!!";
+		for (int i = 0; i < targetSentences.length; i++) {
+			translations[i] = GoogleTranslate.googleTranslateApi(targetSentences[i], ORIGIN_LANGUAGE, desiredLanguage);
 		}
 
-		ourHolder = new Holder(ourHolder, targets, translations);
+		ourHolder = new Holder(ourHolder, targetSentences, translations);
 
 		return ourHolder;
 	}
 }
-
-//GoogleTranslate.googleTranslateApi(targets[i],
-//		Language.ENGLISH, language)

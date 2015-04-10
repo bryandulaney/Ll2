@@ -4,17 +4,23 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
+
 import javax.net.ssl.HttpsURLConnection;
 
 public class GoogleTranslate {
- 
-    private String key;
+	
+	private static final String URL_PART_ONE = "https://www.googleapis.com/language/translate/v2?key=";
+	private static final String URL_PART_TWO = "&q=";
+	private static final String URL_PART_THREE = "&target=";
+    private static final String URL_PART_FOUR = "&source=";
+	private String key;
  
     public GoogleTranslate(String apiKey) {
         key = apiKey;
@@ -24,7 +30,7 @@ public class GoogleTranslate {
         StringBuilder result = new StringBuilder();
         try {
             String encodedText = URLEncoder.encode(text, "UTF-8");
-            String urlStr = "https://www.googleapis.com/language/translate/v2?key=" + key + "&q=" + encodedText + "&target=" + to + "&source=" + from;
+            String urlStr = URL_PART_ONE + key + URL_PART_TWO + encodedText + URL_PART_THREE + to + URL_PART_FOUR + from;
  
             URL url = new URL(urlStr);
  

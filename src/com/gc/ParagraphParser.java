@@ -6,16 +6,19 @@ import org.jsoup.select.Elements;
 
 public class ParagraphParser {
 	
+	private static String body;
+	private static Document doc;
+	private static Elements pTags;
+	private static String[] paragraphs;
+	
 	public static Holder parseBodyIntoParagraphs(Holder ourHolder) {
-		String body = ourHolder.getBody();
-
-		Document doc = Jsoup.parse(body);
-		Elements elements = doc.select("p");
-		
-		String[] paragraphs = new String[elements.size()];
+		body = ourHolder.getBody();
+		doc = Jsoup.parse(body);
+		pTags = doc.select("p");
+		paragraphs = new String[pTags.size()];
 		
 		for (int i = 0; i < paragraphs.length; i++) {
-			paragraphs[i] = elements.get(i).text();
+			paragraphs[i] = pTags.get(i).text();
 		}
 		
 		ourHolder = new Holder(ourHolder, paragraphs);
